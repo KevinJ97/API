@@ -65,30 +65,22 @@ def main():
     objectSearch = "http://www.searchupc.com/handlers/upcsearch.ashx?request_type=3&access_token=B477A55B-D092-4627-9820-5C80A25FCDF1&upc={}".format(UPC)
     search_ = requests.get(objectSearch)
     myJSON = json.loads(search_.text)
-    print(myJSON['0']['productname'])
-    print(myJSON['0']['imageurl'])
+    productName_ = (myJSON['0']['productname'])
+    imageURL_ = (myJSON['0']['imageurl'])
     #print(search_.text)
-
-#GET https://www.googleapis.com/customsearch/v1?key=AIzaSyAl-5kUI1ir5CF90nW-6cjPijs1kxsb-Fw&cx=017576662512468239146:omuauf_lfve&q=lectures
-#subjectName
-#subjectName.replace(" ", "+")
-#str _URL= 'https://www.googleapis.com/customsearch/v1?key=AIzaSyAl-5kUI1ir5CF90nW-6cjPijs1kxsb-Fw&cx=017576662512468239146:omuauf_lfve&q=' + subjectName
-
-#request = urllib2.Request(url, None, {'Referer': /* Enter the URL of your site here */})
-#response = urllib2.urlopen(request)
 
 # Process the JSON string.
 #results = simplejson.load(response)
 # now have some fun with the results...
 #    put_endpoint = 'https://iofood.firebaseio.com/Items/{}/.json?auth={}'.format(UPC, my_api_key)
-#    put_data = { "Test": "Kevin", "Phone": "123-456-7890"}
+#    put_data = { "Name": productName_, "Image URL": imageURL_}
 #    payload = json.dumps(put_data)
 #    put_response = requests.put(put_endpoint, data=payload)
 
-    # username = 'Cloud'
-    # put_endpoint = 'https://iofood.firebaseio.com/.json?auth={}'.format(my_api_key)
-    # get_response = requests.get(get_endpoint)
-    # print (get_response.text)
+#3     username = 'Cloud'
+#     put_endpoint = 'https://iofood.firebaseio.com/.json?auth={}'.format(my_api_key)
+#     get_response = requests.get(get_endpoint)
+#     print (get_response.text)
 
 
 
