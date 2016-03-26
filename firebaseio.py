@@ -1,9 +1,9 @@
 import requests
 import json
 
-my_api_key = "vAMAFHPkw25SPJE4vL1KN4yvOlKpbn2uiFIagmKT"
+my_api_key = "rKxaoEeEqWGh5CLFvMBmK5pEv9WeYA2aZEswJFnX"
 auth_API = '?auth={}'.format(my_api_key)
-url_base = 'https://material-fire.firebaseio.com'
+url_base = 'https://iofood.firebaseio.com'
 
 def main():
     #  Example code to test GET response
@@ -53,12 +53,26 @@ def main():
     # get_response = requests.get(get_endpoint)
     # print (get_response.text)
 
-    message = "I love pie"
-    put_endpoint = 'https://material-fire.firebaseio.com/messages/-KCwhuRu6mppXjM8FIk3.json?auth={}'.format(my_api_key)
-    put_data = { "senderId": "2230f54c-5528-432b-8476-b82264eebf3a", "text": message}
+    # message = "I love pie"
+    # put_endpoint = 'https://material-fire.firebaseio.com/messages/-KCwhuRu6mppXjM8FIk3.json?auth={}'.format(my_api_key)
+    # put_data = { "senderId": "2230f54c-5528-432b-8476-b82264eebf3a", "text": message}
+    # payload = json.dumps(put_data)
+    # put_response = requests.put(put_endpoint, data=payload)
+    # print (put_response.text)
+
+    UPC = raw_input('ENTER UPC: ')
+
+    put_endpoint = 'https://iofood.firebaseio.com/Items/{}/.json?auth={}'.format(UPC, my_api_key)
+    put_data = { "Test": "Kevin", "Phone": "123-456-7890"}
     payload = json.dumps(put_data)
     put_response = requests.put(put_endpoint, data=payload)
-    print (put_response.text)
+
+    # username = 'Cloud'
+    # put_endpoint = 'https://iofood.firebaseio.com/.json?auth={}'.format(my_api_key)
+    # get_response = requests.get(get_endpoint)
+    # print (get_response.text)
+
+
 
 if __name__ == "__main__":
     main()
