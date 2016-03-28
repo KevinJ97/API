@@ -6,53 +6,11 @@ auth_API = '?auth={}'.format(my_api_key)
 url_base = 'https://iofood.firebaseio.com'
 
 def main():
-    # upc = "028400040112"
-    # searchUPC_endpoint = 'http://www.searchupc.com/handlers/upcsearch.ashx?request_type=3&access_token=B477A55B-D092-4627-9820-5C80A25FCDF1&upc={}'.format(upc)
-    # search_response = requests.get(searchUPC_endpoint)
-    # search_JSON = json.loads(search_response.text)
-    #
-    # name = search_JSON['0']['productname']
-    # imageURL = search_JSON['0']['imageurl']
-    #
-    # if imageURL == "N/A":
-    #     imageURL = "https://raw.githubusercontent.com/KevinJ97/IoF/master/startbootstrap-freelancer-1.0.5/logo.png"
-    #
-    # if name == " ":
-    #     name = "Other"
-
-    get_endpoint = 'https://iofood.firebaseio.com/Changes/070847811169.json?orderBy="$key"'
-    get_response = requests.get(get_endpoint)
-    get_JSON = json.loads(get_response.text)
-    myCoords = []
-    for item in get_JSON:
-        myCoords.append((item, get_JSON[item]))
-    newlist = sorted(myCoords, key=lambda k: k[0])
-    for item in newlist:
-        print item
-    # print(lowest)
-    # for item in myCoords:
-    #     print item
-    # sorted(myCoords, key=lambda x: x[0])
-    # print("-----------------")
-    # # for item in myCoords:
-    # print myCoords[0]
-
     #  Example code to test GET response
-    # get_endpoint = 'https://iofood.firebaseio.com/Items/.json'
-    # get_response = requests.get(get_endpoint)
-    # get_JSON = json.loads(get_response.text)
-    # # print get_response.text
-    # for item in get_JSON:
-    #     product = {
-    #         'UPC' : item,
-    #         'Quantity' : get_JSON[item]['count'],
-    #         'ImageURL' : get_JSON[item]['imageURL']
-    #     }
-    #     # for i in item:
-    #     #     print i
-
-    # myDict = []
-
+    # get_endpoint = 'https://www.googleapis.com/customsearch/v1'
+    # data = {'key': 'AIzaSyAl-5kUI1ir5CF90nW-6cjPijs1kxsb-Fw','cx':'008457250590413522654:dl2_s2ixyas', 'q': 'candy'}
+    # get_response = requests.get(get_endpoint, params=data)
+    # print (get_response.text)
     #
     # #  Example code to test PUT response
     # put_endpoint = 'https://samplechat.firebaseio-demo.com/users/jack/name.json'
@@ -103,12 +61,15 @@ def main():
     # put_response = requests.put(put_endpoint, data=payload)
     # print (put_response.text)
 
-    # UPC = raw_input('ENTER UPC: ')
-    #
-    # put_endpoint = 'https://iofood.firebaseio.com/Items/{}/.json?auth={}'.format(UPC, my_api_key)
-    # put_data = { "Test": "Kevin", "Phone": "123-456-7890"}
-    # payload = json.dumps(put_data)
-    # put_response = requests.put(put_endpoint, data=payload)
+    UPC = raw_input('ENTER UPC: ')
+    input_name = raw_input('ENTER NAME:')
+    image_url = raw_input('IMAGE URL: ')
+
+
+    put_endpoint = 'https://iofood.firebaseio.com/Items/{}/.json?auth={}'.format(UPC, my_api_key)
+    put_data = { 'Name': input_name, 'Quanity': 10, 'image': image_url}
+    payload = json.dumps(put_data)
+    put_response = requests.put(put_endpoint, data=payload)
 
     # username = 'Cloud'
     # put_endpoint = 'https://iofood.firebaseio.com/.json?auth={}'.format(my_api_key)
