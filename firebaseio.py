@@ -1,7 +1,8 @@
 import requests
 import json
-import urllib2
-import simplejson
+from bs4 import BeautifulSoup
+# import urllib2
+# import simplejson
 my_api_key = "rKxaoEeEqWGh5CLFvMBmK5pEv9WeYA2aZEswJFnX"
 auth_API = '?auth={}'.format(my_api_key)
 url_base = 'https://iofood.firebaseio.com'
@@ -21,15 +22,15 @@ def main():
     # if name == " ":
     #     name = "Other"
 
-    get_endpoint = 'https://iofood.firebaseio.com/Changes/070847811169.json?orderBy="$key"'
-    get_response = requests.get(get_endpoint)
-    get_JSON = json.loads(get_response.text)
-    myCoords = []
-    for item in get_JSON:
-        myCoords.append((item, get_JSON[item]))
-    newlist = sorted(myCoords, key=lambda k: k[0])
-    for item in newlist:
-        print item
+    # get_endpoint = 'https://iofood.firebaseio.com/Changes/070847811169.json?orderBy="$key"'
+    # get_response = requests.get(get_endpoint)
+    # get_JSON = json.loads(get_response.text)
+    # myCoords = []
+    # for item in get_JSON:
+    #     myCoords.append((item, get_JSON[item]))
+    # newlist = sorted(myCoords, key=lambda k: k[0])
+    # for item in newlist:
+    #     print item
     # print(lowest)
     # for item in myCoords:
     #     print item
@@ -103,7 +104,6 @@ def main():
     # payload = json.dumps(put_data)
     # put_response = requests.put(put_endpoint, data=payload)
     # print (put_response.text)
-<<<<<<< HEAD
 
     # UPC = raw_input('ENTER UPC: ')
     #
@@ -111,14 +111,13 @@ def main():
     # put_data = { "Test": "Kevin", "Phone": "123-456-7890"}
     # payload = json.dumps(put_data)
     # put_response = requests.put(put_endpoint, data=payload)
-=======
-    UPC = raw_input('ENTER UPC: ')
-    UPC.replace(" ","+")
-    objectSearch = "http://www.searchupc.com/handlers/upcsearch.ashx?request_type=3&access_token=B477A55B-D092-4627-9820-5C80A25FCDF1&upc={}".format(UPC)
-    search_ = requests.get(objectSearch)
-    myJSON = json.loads(search_.text)
-    productName_ = (myJSON['0']['productname'])
-    imageURL_ = (myJSON['0']['imageurl'])
+    # UPC = raw_input('ENTER UPC: ')
+    # UPC.replace(" ","+")
+    # objectSearch = "http://www.searchupc.com/handlers/upcsearch.ashx?request_type=3&access_token=B477A55B-D092-4627-9820-5C80A25FCDF1&upc={}".format(UPC)
+    # search_ = requests.get(objectSearch)
+    # myJSON = json.loads(search_.text)
+    # productName_ = (myJSON['0']['productname'])
+    # imageURL_ = (myJSON['0']['imageurl'])
     #print(search_.text)
 
 # Process the JSON string.
@@ -128,12 +127,74 @@ def main():
 #    put_data = { "Name": productName_, "Image URL": imageURL_}
 #    payload = json.dumps(put_data)
 #    put_response = requests.put(put_endpoint, data=payload)
->>>>>>> origin/master
 
 #3     username = 'Cloud'
 #     put_endpoint = 'https://iofood.firebaseio.com/.json?auth={}'.format(my_api_key)
 #     get_response = requests.get(get_endpoint)
 #     print (get_response.text)
+
+    api = "CX4U1SDrsfCopTH6oTli24LX89gZ75xhH6iajGm1"
+
+    data1 = []
+
+    depart = ""
+    classNum = ""
+
+    with open("test.txt") as f:
+        content = f.readlines()
+
+    for item in content:
+        if len(item) == 5:
+            depart = item[:-1]
+        elif len(item) == 4:
+            classNum = item[:-1]
+        else:
+            data1.append(item)
+
+    # print len(data1)
+    for x in range(0, len(data1)):
+            data2 = data1[x].split("	")
+            year = data2[0]
+            semester = data2[1]
+            teacher = data2[2]
+            averageGPR = data2[3]
+            section = data2[4]
+            numA = int(data2[5])
+            numB = int(data2[6])
+            numC = int(data2[7])
+            numD = int(data2[8])
+            numF = int(data2[9])
+            numI = int(data2[10])
+            numQ = int(data2[11])
+            numS = int(data2[12])
+            numU = int(data2[13])
+            numX = int(data2[14])
+
+
+            myData = {
+            'A' : numA,
+            'B' : numB,
+            'C' : numC,
+            'D' : numD,
+            'F' : numF,
+            'I' : numI,
+            'Q' : numQ,
+            'S' : numS,
+            'U' : numU,
+            'X' : numX,
+            'AverageGPR' : averageGPR}
+
+            myJSON = json.dumps(myData)
+            endpoint = "https://visualdisplaytamu.firebaseio.com/{}/{}/{}/{}/{}.json?auth={}".format(year+semester, depart, classNum, section,teacher,api)
+            # endpoint = "https://visualdisplaytamu.firebaseio.com/{}/{}.json?auth={}".format(year+semester,depart,api)
+
+            # print endpoint
+            myRequest = requests.put(endpoint, myJSON)
+            # print myRequest.text
+
+
+
+
 
 
 
